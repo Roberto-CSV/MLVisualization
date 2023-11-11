@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from machineLearningService import MachineLearningService
-from models.customerModel import CustomerModel
-from models.analysisResultModel import AnalysisResultModel
 
 app = FastAPI()
 # Configurar las opciones de CORS
@@ -16,10 +14,8 @@ app.add_middleware(
     allow_headers=["*"],  # Cabeceras permitidas (puedes personalizarlas)
 )
 
-machineLearningService: MachineLearningService = MachineLearningService(
-    './data/Train.csv', 'csv')
-
+machineLearningService: MachineLearningService = MachineLearningService('./data/Train.csv', 'csv')
 
 @app.get("/")
-def test() -> AnalysisResultModel:
+def test():
     return machineLearningService.run()
