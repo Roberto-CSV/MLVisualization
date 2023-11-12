@@ -9,11 +9,11 @@ class DataResultModel(BaseModel):
 
 
 class AnalysisResultModel(BaseModel):
-  original_data: object | None
-  null_data: object | None
-  unique_data: object | None
-  data_types: object | None
-  cleaned_data: object | None
-  transformed_data: object | None
-  transformation_equivalence: object | None
-  stadistic_data: object | None
+  original_data: list[dict] | None
+  null_data: dict | None
+  unique_data: dict | None
+  data_types: dict | None
+  cleaned_data: list[dict] | None
+  transformed_data: list[dict] | None
+  transformation_equivalence: dict | None
+  stadistic_data: dict | None
