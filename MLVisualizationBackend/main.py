@@ -3,7 +3,7 @@ from models.machineLearningModel import MachineLearningModel
 from machineLearningService import MachineLearningService
 from dto.getAnalysis import GetAnalysisDTO
 
-machineLearningService: MachineLearningService = MachineLearningService('./data/Train.csv', 'csv', './trained_models')
+machineLearningService: MachineLearningService = MachineLearningService('./data/EmployeeTrain.csv', 'csv', './trained_models')
 
 get_analysis_dto = GetAnalysisDTO(
   original_data=False,
@@ -16,13 +16,14 @@ get_analysis_dto = GetAnalysisDTO(
   stadistic_data=True
 )
 
-model_regression = MachineLearningModel(name='Máquinas de soporte vectorial', type=AlgorithmsTypesConstant.REGRESSION)
-model_classification = MachineLearningModel(name='Máquinas de soporte vectorial', type=AlgorithmsTypesConstant.CLASSIFICATION)
+model_regression = MachineLearningModel(name='Vecinos más cercanos (KNN)', type=AlgorithmsTypesConstant.REGRESSION)
+model_classification = MachineLearningModel(name='Vecinos más cercanos (KNN)', type=AlgorithmsTypesConstant.CLASSIFICATION)
 
 # print(machineLearningService.analyse_data(get_analysis_dto))
 
 # USE MACHINE LEARNING MODELS 
 
+# machineLearningService.unionFiles()
 machineLearningService.train_model(model_regression)
 machineLearningService.train_model(model_classification)
 

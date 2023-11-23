@@ -92,12 +92,12 @@ class MachineLearningModelsConstant:
     MachineLearningModelsName.RANDOM_FOREST: {
       'name': 'Bosques aleatorios',
       'type': AlgorithmsTypesConstant.CLASSIFICATION,
-      'algorithm': RandomForestClassifier(n_estimators=10)
+      'algorithm': RandomForestClassifier(n_estimators=100)
     },
     MachineLearningModelsName.K_NEAREST_NEIGHBORRS: {
       'name': 'Vecinos más cercanos (KNN)',
       'type': AlgorithmsTypesConstant.CLASSIFICATION,
-      'algorithm': KNeighborsClassifier(n_neighbors=3)
+      'algorithm': KNeighborsClassifier(n_neighbors=5)
     }
   }
 

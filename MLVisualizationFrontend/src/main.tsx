@@ -9,6 +9,6 @@ import { MachineLearning } from './pages/machine-learning/MachineLearning.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Layout children={<Analysis></Analysis>}></Layout>
+    <Layout children={<MachineLearning></MachineLearning>}></Layout>
   </React.StrictMode>,
 )

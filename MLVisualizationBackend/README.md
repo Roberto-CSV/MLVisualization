@@ -1,7 +1,11 @@
 # Documentación
 
+URL de los datos: 
+https://www.kaggle.com/datasets/tawfikelmetwally/employee-dataset
+
+
 ## Ejecución de la API
 
 ```
-uvicorn machineLearningController:app --reload
+python -m uvicorn machineLearningController:app --reload
 ```

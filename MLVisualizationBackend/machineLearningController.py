@@ -1,6 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from constants.machineLearningModelsConstant import AlgorithmsTypesConstant
+from dto.getAnalysis import GetAnalysisDTO
 from machineLearningService import MachineLearningService
+from models.analysisResultModel import AnalysisResultModel
+from models.machineLearningModel import MachineLearningModel
+from models.predictResultModel import PredictResultModel
 
 app = FastAPI()
 # Configurar las opciones de CORS
@@ -14,8 +19,27 @@ app.add_middleware(
     allow_headers=["*"],  # Cabeceras permitidas (puedes personalizarlas)
 )
 
-machineLearningService: MachineLearningService = MachineLearningService('./data/Train.csv', 'csv')
+machineLearningService: MachineLearningService = MachineLearningService('./data/EmployeeTrain.csv', 'csv', './trained_models')
+get_analysis_dto = GetAnalysisDTO(
+  original_data=True,
+  null_data=True,
+  unique_data=True,
+  data_types=False,
+  cleaned_data=True,
+  transformed_data=True,
+  transformation_equivalence=True,
+  stadistic_data=True
+)
 
-@app.get("/")
-def test():
-    return machineLearningService.run()
+@app.post("/predict")
+async def predict(model: MachineLearningModel) -> PredictResultModel:
+    return await machineLearningService.model_predict(model=model)
+
+@app.post("/predictFile")
+async def predict_file(file: UploadFile) -> PredictResultModel:
+    model_classification = MachineLearningModel(name='Bosques aleatorios', type=AlgorithmsTypesConstant.CLASSIFICATION)
+    return await machineLearningService.model_predict(model=model_classification, file=file)
+
+@app.get("/analyse")
+def analyse() -> AnalysisResultModel:
+    return machineLearningService.analyse_data(get_analysis_dto)

@@ -25,7 +25,12 @@ export const ConfusionMatrixTypes = {
 }
 
 export const ConfusionMatrix = ({ data }) => {
-    const confusionMatrix: ConfusionMatrixInterface = data;
+    const confusionMatrix: ConfusionMatrixInterface = {
+        truePositive: data[0][0],
+        falseNegative: data[0][1],
+        falsePositive: data[1][0],
+        trueNegative: data[1][1],
+    };
     const elementsQuantity: number = confusionMatrix.truePositive
         + confusionMatrix.falsePositive
         + confusionMatrix.trueNegative
@@ -37,7 +42,7 @@ export const ConfusionMatrix = ({ data }) => {
             backgroundColor = 'bg-danger';
         } else if (percentile >= 0.6) {
             backgroundColor = 'bg-warning-subtle';
-        } else if (percentile >= 0.3) {
+        } else if (percentile >= 0.19) {
             backgroundColor = 'bg-success-subtle';
         } else {
             backgroundColor = 'bg-primary-subtle';
